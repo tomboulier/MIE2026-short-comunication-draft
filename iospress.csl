@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0"
+  class="in-text"
+  name="IOS Press (Vancouver numeric)"
+  default-locale="en-US">
+  <info>
+    <title>IOS Press (Vancouver numeric)</title>
+    <id>http://www.zotero.org/styles/iospress-vancouver</id>
+    <link href="http://www.zotero.org/styles/vancouver" rel="template"/>
+    <author>
+      <name>ChatGPT adaptation</name>
+      <email>tomboulier@chuga.fr</email>
+    </author>
+    <category citation-format="numeric"/>
+    <category field="medicine"/>
+    <updated>2025-10-09T00:00:00+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This style is adapted from Vancouver for IOS Press conference proceedings.</rights>
+  </info>
+
+  <!-- Citation style: numeric in square brackets -->
+<citation collapse="citation-number">
+  <layout delimiter=", ">
+    <group prefix="[" suffix="]">
+      <text variable="citation-number"/>
+    </group>
+  </layout>
+</citation>
+
+
+  <!-- Bibliography style -->
+  <bibliography et-al-min="3" et-al-use-first="6" entry-spacing="0">
+  <layout suffix=".">
+    <group delimiter=" ">
+      <group prefix="[" suffix="]">
+        <text variable="citation-number"/>
+      </group>
+      <names variable="author">
+        <name form="short" and="text" delimiter=", " initialize-with="."/>
+        <label form="short" prefix=" "/>
+      </names>
+      <text variable="title"/>
+      <group delimiter=". ">
+        <text variable="container-title" font-style="italic"/>
+        <group delimiter=";">
+          <date variable="issued">
+            <date-part name="year"/>
+          </date>
+          <group delimiter=":">
+            <text variable="volume"/>
+            <text variable="page"/>
+          </group>
+        </group>
+      </group>
+      <text variable="DOI" prefix="doi:"/>
+    </group>
+  </layout>
+</bibliography>
+</style>
