@@ -18,21 +18,18 @@ In France, the *If-PBM* program was introduced to support the implementation of 
 
 This work describes the method we used in Grenoble Alpes University Hospital for integrating PBM quality dashboards using data from a clinical data warehouse.
 
-## 2. Materials and Methods
+## 2. Methods
 
-### PREDIMED data warehouse
 The *PREDIMED* platform (*Plateforme de Recueil et d’Exploitation des Données bIoMédicales*) is the clinical data warehouse of Grenoble Alpes University Hospital [@Artemova2019]. It combines an ELT stack with the **ArangoDB** multi-model graph database, which enables semantic linkage between entities (patients, transfusions, lab tests, prescriptions, hospital stays, etc.).
 
 ### Extraction and linkage strategy
 Each PBM indicator requires combining several data sources:
+
 - preoperative hemoglobin and iron status (pillar 1),
 - intraoperative blood loss and transfusion timing (pillar 2),
 - postoperative anemia tolerance (pillar 3).
 
 The graph model enables flexible traversal of relationships between transfused blood units and corresponding patient records. Data pipelines are orchestrated via **Talend** and **Python scripts**, producing aggregated metrics quarterly.
-
-### Automation and visualization
-Dashboards are generated automatically using SQL and Python scripts and deployed on a secure intranet portal. They display compliance trends, transfusion rates, and adherence to Hb thresholds and preoperative anemia correction.
 
 ## 3. Results
 
@@ -41,6 +38,7 @@ Dashboards are generated automatically using SQL and Python scripts and deployed
 - **Volume:** ?? transfusion and lab events processed.  
 
 Example indicators include:
+
 - proportion of transfusions respecting Hb thresholds;
 - rate of preoperative anemia correction;
 - temporal trends per department.  
