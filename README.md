@@ -9,3 +9,7 @@ Generate paper .docx (MIE submission format) :
 ```bash
 make
 ```
+
+## Sources
+
+- MIE 2026 call for papers: https://mie2026.efmi.org/call-for-papers
