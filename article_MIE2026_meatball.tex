@@ -9,7 +9,6 @@
 \normalfont
 \usepackage[T1]{fontenc}
 
-\def\hb{\hbox to 11.5 cm{}}
 \begin{document}
 
 \pagestyle{headings}
@@ -17,8 +16,6 @@
 \begin{frontmatter}
 
 \title{Monitoring adherence to PBM guidelines from clinical data warehouse: a case study}
-
-\markboth{}{October 2025\hb}
 
 \author[A]{\fnms{Paul-Antoine} \snm{BEAUDOIN}},
 \author[A]{\fnms{Alexandre} \snm{GODON}},
@@ -41,8 +38,6 @@ producing quality reports using data from a graph-based clinical data warehouse.
 Patient Blood Management\sep Clinical data warehouse\sep Graph database \sep Health information system
 \end{keyword}
 \end{frontmatter}
-
-\markboth{October 2025\hb}{October 2025\hb}
 
 \section{Introduction}
 
@@ -68,7 +63,7 @@ Five indicators were computed every three months: the proportion of standardized
  proportion of patients discharged with low hemoglobin levels. Each indicator was calculated for 3 
  specific surgical specialties: orthopedics, cardiology, and gynecology. 
 
-PBM indicators were computed quarterly from our graph-based clinical data warehouse \cite{Artemova2019}
+PBM indicators were computed from our graph-based clinical data warehouse \cite{Artemova2019}
 using Talend-orchestrated Python pipelines linking patients, transfusions, lab tests, and surgical 
 procedures.
 
@@ -86,9 +81,8 @@ reaching 90\% by August 2023 from 30\% in May 2023, while gynecology remained un
 60\% throughout the period.
 
 \begin{figure}[h!]
-\vspace{-1em}
 \centering
-\includegraphics[width=0.85\textwidth]{figure.png}
+\includegraphics[width=0.7\textwidth]{figure.png}
 \caption{Temporal trends of standardized preoperative PBM assessment completion rates by surgical specialty (May 2023 -- February 2025). The graph shows quarterly measurements for orthopedics (blue), cardiology (orange), gynecology (green), and overall hospital performance (dark blue).}
 \label{fig:pbm_trends}
 \vspace{-1em}
@@ -96,20 +90,20 @@ reaching 90\% by August 2023 from 30\% in May 2023, while gynecology remained un
 
 \section{Discussion}
 
-Our automated reports identified departments requiring targeted PBM education 
-(e.g., gynecology for preoperative assessments). We plan to implement targeted micro-learning modules,
-using these automated reports as the primary, objective criterion to evaluate their effectiveness.
+Our automated reports identified departments requiring targeted PBM education, 
+which will be addressed through micro-learning modules.
 
-Future developments involve refactoring the current stack with modern tools (Dagster, dbt, OMOP) as part of a regional 
-initiative to deploy fully automated, web-accessible dashboards.
+The current stack is being refactored with modern tools (Dagster, dbt, OMOP) 
+as part of a regional data warehouse initiative, enabling 
+fully automated, web-accessible dashboards.
 
 \begin{thebibliography}{99}
 
 \bibitem{godonReductionRedBlood2024}
-Godon A, Dupuis M, Amdaa S, Pevet G, Girard E, Fiard G, Sourd D, Bosson JL, Payen JF, Albaladejo P, Bouzat P. Reduction of red blood cell transfusion with a patient blood management protocol in urological and visceral surgery: A before-after study. Anaesthesia Critical Care \& Pain Medicine. 2024 Aug;43(4):101395.
+Godon A, et al. Reduction of red blood cell transfusion with a patient blood management protocol in urological and visceral surgery: A before-after study. Anaesthesia Critical Care \& Pain Medicine. 2024 Aug;43(4):101395.
 
 \bibitem{Artemova2019}
-Artemova S, Madiot PE, Moreau-Gaudry A, et al. PREDIMED: Clinical Data Warehouse of Grenoble Alpes University Hospital. In: MEDINFO 2019: Health and Wellbeing e-Networks for All. 2019. p. 1421--1425.
+Artemova S, et al. PREDIMED: Clinical Data Warehouse of Grenoble Alpes University Hospital. In: MEDINFO 2019: Health and Wellbeing e-Networks for All. 2019. p. 1421--1425.
 
 \end{thebibliography}
 
