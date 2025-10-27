@@ -16,7 +16,7 @@
 \def\thepage{}
 \begin{frontmatter}
 
-\title{Monitoring adherence to PBM recommendations from graph-based clinical data warehouse: a case study from Grenoble University Hospital}
+\title{Monitoring adherence to PBM guidelines from clinical data warehouse: a case study}
 
 \markboth{}{October 2025\hb}
 
@@ -32,9 +32,9 @@ and
 \address[A]{Univ. Grenoble Alpes, CNRS, UMR 5525, VetAgro Sup, Grenoble INP, CHU Grenoble Alpes, TIMC, 38000 Grenoble, France}
 
 \begin{abstract}
-Despite strong guidelines, implementing Patient Blood Management (PBM) in routine practice remains 
+Despite strong evidence, implementing Patient Blood Management (PBM) in routine practice remains 
 challenging. This work describes the method we used at Grenoble Alpes University Hospital for 
-producing PBM quality reports using data from a clinical data warehouse.
+producing quality reports using data from a graph-based clinical data warehouse.
 \end{abstract}
 
 \begin{keyword}
@@ -50,7 +50,7 @@ Patient Blood Management (PBM) is an evidence-based, multidisciplinary approach 
 optimize patient care and reduce unnecessary transfusion. 
 It relies on three pillars: detection and correction of preoperative anemia, reduction 
 of perioperative blood loss, and optimization of anemia tolerance. 
-Patient Blood Management (PBM) has demonstrated effectiveness in reducing 
+It has demonstrated effectiveness in reducing 
 transfusions \cite{godonReductionRedBlood2024}, yet variability in adherence across 
 departments persists and scaling implementation requires continuous monitoring and feedback.
 This addresses a key challenge in health informatics: integrating information 
@@ -63,34 +63,15 @@ for improvement.
 
 \section{Methods}
 
-\subsection{PBM indicators and data requirements}
-
 Five indicators were computed every three months: the proportion of standardized PBM preoperative check-ups,
  the proportion of corrective treatments for anemia or iron deficiency, the proportion of patients 
  transfused per- or postoperatively, the proportion of single-unit transfusion episodes, and the 
  proportion of patients discharged with low hemoglobin levels. Each indicator was calculated for 3 
  specific surgical specialties: orthopedics, cardiology, and gynecology. 
 
-\subsection{Data infrastructure}
-
-Each PBM indicator requires combining several data sources from the hospital information system, and thus
-can be computed from a clinical data warehouse.
-The \textit{PREDIMED} platform (\textit{Plateforme de Recueil et d'Exploitation des Données bIoMédicales})
- is the clinical data warehouse of Grenoble Alpes University Hospital \cite{Artemova2019}. 
- It combines an ELT (Extract-Load-Transform) stack with \textbf{ArangoDB}, a multi-model graph database, 
- which enables semantic linkage between entities (patients, transfusions, etc.).
-
-\subsection{Data pipeline architecture}
-
-Data pipelines are orchestrated via \textbf{Talend} and \textbf{Python} scripts, producing aggregated 
-metrics on a quarterly basis. The workflow includes:
-
-\begin{enumerate}
-\item Extraction of relevant entities from the graph database (patients, transfusions, lab tests, surgical procedures);
-\item Linkage of entities through graph traversal queries;
-\item Computation of compliance metrics for each PBM recommendation;
-\item Generation of temporal trends charts.
-\end{enumerate}
+PBM indicators were computed quarterly from our graph-based clinical data warehouse \cite{Artemova2019}
+using Talend-orchestrated Python pipelines linking patients, transfusions, lab tests, and surgical 
+procedures.
 
 \section{Results}
 
@@ -132,14 +113,8 @@ real-time monitoring across the region.
 \bibitem{godonReductionRedBlood2024}
 Godon A, Dupuis M, Amdaa S, Pevet G, Girard E, Fiard G, Sourd D, Bosson JL, Payen JF, Albaladejo P, Bouzat P. Reduction of red blood cell transfusion with a patient blood management protocol in urological and visceral surgery: A before-after study. Anaesthesia Critical Care \& Pain Medicine. 2024 Aug;43(4):101395.
 
-\bibitem{Rabiei2022}
-Rabiei R, Almasi S. Requirements and challenges of hospital dashboards: a systematic literature review. BMC Medical Informatics and Decision Making. 2022;22:287.
-
 \bibitem{Artemova2019}
 Artemova S, Madiot PE, Moreau-Gaudry A, et al. PREDIMED: Clinical Data Warehouse of Grenoble Alpes University Hospital. In: MEDINFO 2019: Health and Wellbeing e-Networks for All. 2019. p. 1421--1425.
-
-\bibitem{Mehra2015}
-Mehra T, Seifert B, Spahn DR. Implementation of a patient blood management monitoring and feedback program significantly reduces transfusions and costs. Transfusion. 2015;55:2807--2815.
 
 \end{thebibliography}
 
