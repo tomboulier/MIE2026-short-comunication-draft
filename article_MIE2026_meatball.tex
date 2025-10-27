@@ -23,7 +23,6 @@
 \author[A]{\fnms{Paul-Antoine} \snm{BEAUDOIN}},
 \author[A]{\fnms{Alexandre} \snm{GODON}},
 \author[A]{\fnms{Sebastien} \snm{MARQUET}},
-\author[A]{\fnms{Jean-Luc} \snm{BOSSON}},
 \author[A]{\fnms{Thomas} \snm{BOULIER}%
 \thanks{Corresponding Author: Thomas Boulier, E-mail: tboulier@chu-grenoble.fr.}}, 
 and
@@ -60,7 +59,8 @@ optimize patient care and reduce unnecessary transfusion \cite{shander2022global
 It relies on three pillars: detection and correction of preoperative anemia, reduction 
 of perioperative blood loss, and optimization of anemia tolerance. 
 Despite strong national \cite{theissen2024perioperative} and international \cite{tibi2021sts} 
-guidelines, implementing PBM in routine practice remains challenging \cite{godonReductionRedBlood2024}.
+guidelines, implementing PBM in routine practice remains challenging but 
+effective \cite{godonReductionRedBlood2024}.
 
 In France, the \textit{If-PBM} ("Incitation financière au PBM") program was introduced 
 to support the implementation of PBM through targeted funding ("Article 51" experimentation). 
@@ -126,13 +126,19 @@ reaching 90\% by August 2023 from 30\% in May 2023, while gynecology remained un
 
 \section{Discussion}
 
-Integrating PBM indicators into a clinical data warehouse enables automated quality monitoring at 
-hospital scale. 
+Integrating PBM indicators into a graph-based clinical data warehouse enables
+ \textbf{automated quality monitoring} at hospital scale.
 
-Future developments involves a refactoring of the current data stack with modern tools (\textbf{Dagster}, 
-\textbf{dbt}, \textbf{OMOP}) to facilitate deployment, in a region-wide initiative called D2H. The objective
-is to generalize real-time PBM monitoring and support adaptive interventions (such as micro-learning).
+Our automated reports identified departments with strong adherence to specific practices 
+(e.g., orthopedics for preoperative assessments) and those requiring improvement. 
+These reports will serve as the primary objective outcome measure to evaluate the 
+effectiveness of a micro-learning intervention targeting low-adherence specialties.
 
+Future technical developments involve refactoring the current data stack with modern 
+tools (\textbf{Dagster}, \textbf{dbt}, \textbf{OMOP}) as part of a regional clinical 
+datawarehouse initiative. The objective is to replace semi-manual orchestration 
+(Talend, Python scripts) with fully automated, web-accessible dashboards enabling 
+real-time monitoring across the region.
 \begin{thebibliography}{99}
 
 \bibitem{shander2022global}
