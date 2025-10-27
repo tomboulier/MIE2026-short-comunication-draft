@@ -1,59 +1,27 @@
 # MIE2026 Short Communication - unified build system
-# Requires: pandoc, LaTeX, and optionally wkhtmltopdf
+# Requires: pdflatex
 
-PAPER=paper
-BIB=refs.bib
-CSL=iospress.csl
-PANDOC_ARGS=--lua-filter=author-info-blocks.lua --lua-filter=scholarly-metadata.lua
+MAIN = article_MIE2026_meatball
+TEX = pdflatex
+CLS_FILE = IOS-Book-Article.cls
+CLS_URL = https://raw.githubusercontent.com/vtex-soft/texsupport.IOS-Book-Article/master/IOS-Book-Article.cls
 
-all: $(PAPER).docx $(PAPER).pdf
+all: $(CLS_FILE) $(MAIN).pdf
 
-$(PAPER).docx: $(PAPER).md $(BIB) $(CSL)
-	pandoc $(PAPER).md \
-		--from markdown \
-		--to docx \
-		--output $(PAPER).docx \
-		--bibliography=$(BIB) \
-		--csl=$(CSL) \
-		--citeproc
+$(MAIN).pdf: $(MAIN).tex
+	$(TEX) $(MAIN).tex
+	$(TEX) $(MAIN).tex
 
-$(PAPER).pdf: $(PAPER).md $(BIB) $(CSL)
-	pandoc $(PAPER).md \
-		--from markdown \
-		--to pdf \
-		--output $(PAPER).pdf \
-		--bibliography=$(BIB) \
-		--csl=$(CSL) \
-		--citeproc
+# Download the required class file if not present
+$(CLS_FILE):
+	@echo "Download $(CLS_FILE) from GitHub..."
+	wget -q $(CLS_URL) -O $(CLS_FILE)
+	@echo "✓ $(CLS_FILE) downloaded"
 
 clean:
-	rm -f $(PAPER).pdf $(PAPER).docx $(PAPER).html
+	rm -f $(MAIN).aux $(MAIN).log $(MAIN).out $(MAIN).toc
 
-# --------------------------------------------------
-# Installation of dependencies on Debian-based systems (install)
-# --------------------------------------------------
-install:
-	@echo "Installing Pandoc and LaTeX dependencies..."
-	sudo apt update
-	sudo apt install -y pandoc \
-		texlive-latex-base \
-		texlive-latex-recommended \
-		texlive-fonts-recommended \
-		texlive-latex-extra \
-		texlive-fonts-extra \
-		texlive-xetex
-	@echo "Download lua filters..."
-	mkdir -p filters
-	cd filters
-	wget https://raw.githubusercontent.com/pandoc/lua-filters/master/author-info-blocks/author-info-blocks.lua
-	wget https://raw.githubusercontent.com/pandoc/lua-filters/master/scholarly-metadata/scholarly-metadata.lua
-	cd ..
-	@echo "✅ Installation complete."
+distclean: clean
+	rm -f $(MAIN).pdf
 
-# --------------------------------------------------
-# VVerification (check)
-# --------------------------------------------------
-check:
-	@command -v pandoc >/dev/null 2>&1 || { echo "❌ Pandoc not found"; exit 1; }
-	@command -v pdflatex >/dev/null 2>&1 || { echo "❌ LaTeX not found"; exit 1; }
-	@echo "✅ All dependencies present."
+.PHONY: all clean distclean
