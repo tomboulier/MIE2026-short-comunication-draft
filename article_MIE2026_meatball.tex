@@ -32,17 +32,9 @@ and
 \address[A]{Univ. Grenoble Alpes, CNRS, UMR 5525, VetAgro Sup, Grenoble INP, CHU Grenoble Alpes, TIMC, 38000 Grenoble, France}
 
 \begin{abstract}
-Patient Blood Management (PBM) is an evidence-based approach to optimize transfusion 
-practices and patient outcomes. Despite strong guidelines, implementing PBM in routine 
-practice remains challenging. This work describes the development of 
-automated reports for monitoring adherence to PBM recommendations using the 
-clinical data warehouse of Grenoble Alpes University Hospital. 
-By leveraging a graph-based data model with ArangoDB, we implemented data pipelines
-that process transfusion events, laboratory tests, and surgical procedures to generate 
-quarterly PBM adherence indicators. Our approach enables automated quality monitoring 
-at hospital scale and provides actionable feedback to clinical teams. Future 
-developments include refactoring the current data stack with modern tools for regional
-deployment and using these reports to evaluate the impact of a micro-learning program.
+Despite strong guidelines, implementing Patient Blood Management (PBM) in routine practice remains 
+challenging. This work describes the method we used at Grenoble Alpes University Hospital for 
+producing PBM quality reports using data from a clinical data warehouse.
 \end{abstract}
 
 \begin{keyword}
@@ -55,23 +47,19 @@ Patient Blood Management\sep Clinical data warehouse\sep Graph database \sep Hea
 \section{Introduction}
 
 Patient Blood Management (PBM) is an evidence-based, multidisciplinary approach to
-optimize patient care and reduce unnecessary transfusion \cite{shander2022global}. 
+optimize patient care and reduce unnecessary transfusion. 
 It relies on three pillars: detection and correction of preoperative anemia, reduction 
 of perioperative blood loss, and optimization of anemia tolerance. 
-Despite strong national \cite{theissen2024perioperative} and international \cite{tibi2021sts} 
-guidelines, implementing PBM in routine practice remains challenging but 
-effective \cite{godonReductionRedBlood2024}.
-
-In France, the \textit{If-PBM} ("Incitation financière au PBM") program was introduced 
-to support the implementation of PBM through targeted funding ("Article 51" experimentation). 
-One of its key requirements is to develop dashboards for monitoring adherence to 
-PBM guidelines, providing funded centers with tools to track progress and identify areas
-for improvement.
-
-This work describes the method we used at Grenoble Alpes University Hospital for 
-producing PBM quality reports using data from a clinical data warehouse. 
+Patient Blood Management (PBM) has demonstrated effectiveness in reducing 
+transfusions \cite{godonReductionRedBlood2024}, yet variability in adherence across 
+departments persists and scaling implementation requires continuous monitoring and feedback.
 This addresses a key challenge in health informatics: integrating information 
 technology within real healthcare systems to support continuous quality improvement.
+
+In France, the \textit{If-PBM} program was introduced to support the implementation of PBM 
+through targeted funding.  One of its key requirements is to develop dashboards for monitoring 
+adherence to PBM guidelines, providing funded centers with tools to track progress and identify areas
+for improvement.
 
 \section{Methods}
 
@@ -140,15 +128,6 @@ datawarehouse initiative. The objective is to replace semi-manual orchestration
 (Talend, Python scripts) with fully automated, web-accessible dashboards enabling 
 real-time monitoring across the region.
 \begin{thebibliography}{99}
-
-\bibitem{shander2022global}
-Shander A, Hardy JF, Ozawa S, Farmer SL, Hofmann A, Frank SM, Kor DJ, Faraoni D, Freedman J. A global definition of patient blood management. Anesthesia \& Analgesia. 2022;135(3):476--488.
-
-\bibitem{theissen2024perioperative}
-Theissen A, Folléa G, Garban F, Carlier M, Pontone S, Lassale B, Boyer B, Noll E, Arthuis C, Ducloy-Bouthors AS, et al. Perioperative patient blood management (excluding obstetrics): guidelines from the French National Authority for Health. Anaesthesia Critical Care \& Pain Medicine. 2024;43(5):101404.
-
-\bibitem{tibi2021sts}
-Tibi P, McClure RS, Huang J, Baker RA, Fitzgerald D, Mazer CD, Stone M, Chu D, Stammers AH, Dickinson T, et al. STS/SCA/AmSECT/SABM update to the clinical practice guidelines on patient blood management. The Journal of ExtraCorporeal Technology. 2021;53(2):97--124.
 
 \bibitem{godonReductionRedBlood2024}
 Godon A, Dupuis M, Amdaa S, Pevet G, Girard E, Fiard G, Sourd D, Bosson JL, Payen JF, Albaladejo P, Bouzat P. Reduction of red blood cell transfusion with a patient blood management protocol in urological and visceral surgery: A before-after study. Anaesthesia Critical Care \& Pain Medicine. 2024 Aug;43(4):101395.
