@@ -75,32 +75,26 @@ technology within real healthcare systems to support continuous quality improvem
 
 \section{Methods}
 
+\subsection{PBM indicators and data requirements}
+
+Five indicators were computed every three months: the proportion of standardized PBM preoperative check-ups,
+ the proportion of corrective treatments for anemia or iron deficiency, the proportion of patients 
+ transfused per- or postoperatively, the proportion of single-unit transfusion episodes, and the 
+ proportion of patients discharged with low hemoglobin levels. Each indicator was calculated for 3 
+ specific surgical specialties: orthopedics, cardiology, and gynecology. 
+
 \subsection{Data infrastructure}
 
+Each PBM indicator requires combining several data sources from the hospital information system, and thus
+can be computed from a clinical data warehouse.
 The \textit{PREDIMED} platform (\textit{Plateforme de Recueil et d'Exploitation des Données bIoMédicales})
  is the clinical data warehouse of Grenoble Alpes University Hospital \cite{Artemova2019}. 
  It combines an ELT (Extract-Load-Transform) stack with \textbf{ArangoDB}, a multi-model graph database, 
- which enables semantic linkage between entities (patients, transfusions, laboratory tests, prescriptions, 
- hospital stays, surgical procedures, etc.).
-
-\subsection{PBM indicators and data requirements}
-
-Each PBM indicator requires combining several data sources across the three pillars:
-
-\begin{itemize}
-\item \textbf{Pillar 1:} Preoperative hemoglobin levels and iron status assessment
-\item \textbf{Pillar 2:} Intraoperative blood loss estimation and transfusion timing
-\item \textbf{Pillar 3:} Postoperative anemia tolerance thresholds
-\end{itemize}
-
-The graph model enables flexible traversal of relationships between transfused blood units and 
-corresponding patient records, surgical procedures, and laboratory results. This approach differs 
-from traditional relational models by allowing dynamic queries across heterogeneous medical entities 
-without rigid schema constraints.
+ which enables semantic linkage between entities (patients, transfusions, etc.).
 
 \subsection{Data pipeline architecture}
 
-Data pipelines are orchestrated via \textbf{Talend} and \textbf{Python scripts}, producing aggregated 
+Data pipelines are orchestrated via \textbf{Talend} and \textbf{Python} scripts, producing aggregated 
 metrics on a quarterly basis. The workflow includes:
 
 \begin{enumerate}
@@ -112,36 +106,32 @@ metrics on a quarterly basis. The workflow includes:
 
 \section{Results}
 
-The PBM monitoring system has been operational since early 2024, with quarterly reports updates sent 
-to anesthesiologist physicians in concerned surgical departments. 
+The PBM monitoring system has been operational since May 2023, with quarterly 
+reports deployed across three surgical specialties. Over a two-year period, an 
+average of 353 surgeries per quarter were analyzed (orthopedics: 170, 
+cardiology: 132, gynecology: 75).
 
-Key deployment metrics include:
+As an example, Figure~\ref{fig:pbm_trends} illustrates the temporal evolution of preoperative 
+PBM assessment completion rates. Overall compliance increased from 40\% in May 
+2023 to 80\% in February 2025. Orthopedics showed the fastest improvement, 
+reaching 90\% by August 2023 from 30\% in May 2023, while gynecology remained under
+60\% throughout the period.
 
-\begin{itemize}
-\item \textbf{Coverage:} All surgical units (general surgery, urology, orthopedics, cardiac surgery)
-\item \textbf{Frequency:} Quarterly updates with retrospective 3-month analysis
-\item \textbf{Data volume:} Processing of thousands of transfusion events and laboratory results per quarter
-\end{itemize}
-
-Example indicators tracked in the dashboards include:
-
-\begin{itemize}
-\item Proportion of transfusions respecting recommended hemoglobin thresholds
-\item Rate of preoperative anemia screening and correction
-\item Temporal trends per department and surgical specialty
-\item Compliance with intraoperative blood conservation strategies
-\end{itemize}
-
-Preliminary analyses reveal significant variations between departments and an overall improvement 
-trend in PBM compliance over time. The visual dashboards provide actionable feedback, enabling clinical 
-teams to identify specific areas requiring intervention.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.85\textwidth]{figure.png}
+\caption{Temporal trends of standardized preoperative PBM assessment completion rates by surgical specialty (May 2023 -- February 2025). The graph shows quarterly measurements for orthopedics (blue), cardiology (orange), gynecology (green), and overall hospital performance (dark blue).}
+\label{fig:pbm_trends}
+\end{figure}
 
 \section{Discussion}
 
-Integrating PBM indicators into a graph-based clinical data warehouse enables automated quality monitoring at 
-hospital scale. Future developments involves a refactoring of the current data stack with modern tools (Dagster, dbt, OMOP), 
-in a region-wide initiative called D2H. The objective is to generalize real-time PBM monitoring and 
-support adaptive interventions (such as micro-learning).
+Integrating PBM indicators into a clinical data warehouse enables automated quality monitoring at 
+hospital scale. 
+
+Future developments involves a refactoring of the current data stack with modern tools (\textbf{Dagster}, 
+\textbf{dbt}, \textbf{OMOP}) to facilitate deployment, in a region-wide initiative called D2H. The objective
+is to generalize real-time PBM monitoring and support adaptive interventions (such as micro-learning).
 
 \begin{thebibliography}{99}
 
