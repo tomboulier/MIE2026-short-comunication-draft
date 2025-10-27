@@ -33,11 +33,21 @@ and
 \address[A]{Univ. Grenoble Alpes, CNRS, UMR 5525, VetAgro Sup, Grenoble INP, CHU Grenoble Alpes, TIMC, 38000 Grenoble, France}
 
 \begin{abstract}
-Patient Blood Management (PBM) is an evidence-based approach to optimize transfusion practices and patient outcomes. Despite strong guidelines, implementing PBM in routine practice remains challenging. The French If-PBM program aims to support implementation through targeted funding and quality monitoring. This work describes the development of real-time dashboards for monitoring adherence to PBM recommendations using the PREDIMED clinical data warehouse at Grenoble Alpes University Hospital. By leveraging a graph-based data model with ArangoDB, we implemented automated pipelines that process transfusion events, laboratory tests, and surgical procedures to generate quarterly PBM quality indicators. Our approach enables continuous quality monitoring at hospital scale and provides actionable feedback to clinical teams. Future developments include refactoring with modern data stack tools (Dagster, dbt, OMOP) as part of the regional D2H initiative.
+Patient Blood Management (PBM) is an evidence-based approach to optimize transfusion 
+practices and patient outcomes. Despite strong guidelines, implementing PBM in routine 
+practice remains challenging. This work describes the development of 
+automated reports for monitoring adherence to PBM recommendations using the 
+clinical data warehouse of Grenoble Alpes University Hospital. 
+By leveraging a graph-based data model with ArangoDB, we implemented data pipelines
+that process transfusion events, laboratory tests, and surgical procedures to generate 
+quarterly PBM adherence indicators. Our approach enables automated quality monitoring 
+at hospital scale and provides actionable feedback to clinical teams. Future 
+developments include refactoring the current data stack with modern tools for regional
+deployment and using these reports to evaluate the impact of a micro-learning program.
 \end{abstract}
 
 \begin{keyword}
-Patient Blood Management\sep Clinical data warehouse\sep Quality indicators\sep Graph database\sep Dashboard\sep Health information system
+Patient Blood Management\sep Clinical data warehouse\sep Graph database \sep Health information system
 \end{keyword}
 \end{frontmatter}
 
@@ -45,17 +55,33 @@ Patient Blood Management\sep Clinical data warehouse\sep Quality indicators\sep 
 
 \section{Introduction}
 
-Patient Blood Management (PBM) is an evidence-based, multidisciplinary approach to optimize patient care and reduce unnecessary transfusion \cite{shander2022global}. It relies on three pillars: detection and correction of preoperative anemia, reduction of perioperative blood loss, and optimization of anemia tolerance. Despite strong national \cite{theissen2024perioperative} and international \cite{tibi2021sts} guidelines, implementing PBM in routine practice remains challenging \cite{godonReductionRedBlood2024}.
+Patient Blood Management (PBM) is an evidence-based, multidisciplinary approach to
+optimize patient care and reduce unnecessary transfusion \cite{shander2022global}. 
+It relies on three pillars: detection and correction of preoperative anemia, reduction 
+of perioperative blood loss, and optimization of anemia tolerance. 
+Despite strong national \cite{theissen2024perioperative} and international \cite{tibi2021sts} 
+guidelines, implementing PBM in routine practice remains challenging \cite{godonReductionRedBlood2024}.
 
-In France, the \textit{If-PBM} program was introduced to support the implementation of PBM through targeted funding (Article 51 experimentation). One of its key requirements is to develop dashboards for monitoring adherence to PBM guidelines, providing funded centers with tools to track progress and identify areas for improvement.
+In France, the \textit{If-PBM} ("Incitation financière au PBM") program was introduced 
+to support the implementation of PBM through targeted funding ("Article 51" experimentation). 
+One of its key requirements is to develop dashboards for monitoring adherence to 
+PBM guidelines, providing funded centers with tools to track progress and identify areas
+for improvement.
 
-This work describes the method we used at Grenoble Alpes University Hospital for integrating PBM quality dashboards using data from a clinical data warehouse. This addresses a key challenge in health informatics: integrating information technology within real healthcare systems to support continuous quality improvement \cite{Rabiei2022}.
+This work describes the method we used at Grenoble Alpes University Hospital for 
+producing PBM quality reports using data from a clinical data warehouse. 
+This addresses a key challenge in health informatics: integrating information 
+technology within real healthcare systems to support continuous quality improvement.
 
 \section{Methods}
 
 \subsection{Data infrastructure}
 
-The \textit{PREDIMED} platform (\textit{Plateforme de Recueil et d'Exploitation des Données bIoMédicales}) is the clinical data warehouse of Grenoble Alpes University Hospital \cite{Artemova2019}. It combines an ELT (Extract-Load-Transform) stack with \textbf{ArangoDB}, a multi-model graph database, which enables semantic linkage between entities (patients, transfusions, laboratory tests, prescriptions, hospital stays, surgical procedures, etc.).
+The \textit{PREDIMED} platform (\textit{Plateforme de Recueil et d'Exploitation des Données bIoMédicales})
+ is the clinical data warehouse of Grenoble Alpes University Hospital \cite{Artemova2019}. 
+ It combines an ELT (Extract-Load-Transform) stack with \textbf{ArangoDB}, a multi-model graph database, 
+ which enables semantic linkage between entities (patients, transfusions, laboratory tests, prescriptions, 
+ hospital stays, surgical procedures, etc.).
 
 \subsection{PBM indicators and data requirements}
 
@@ -67,25 +93,29 @@ Each PBM indicator requires combining several data sources across the three pill
 \item \textbf{Pillar 3:} Postoperative anemia tolerance thresholds
 \end{itemize}
 
-The graph model enables flexible traversal of relationships between transfused blood units and corresponding patient records, surgical procedures, and laboratory results. This approach differs from traditional relational models by allowing dynamic queries across heterogeneous medical entities without rigid schema constraints.
+The graph model enables flexible traversal of relationships between transfused blood units and 
+corresponding patient records, surgical procedures, and laboratory results. This approach differs 
+from traditional relational models by allowing dynamic queries across heterogeneous medical entities 
+without rigid schema constraints.
 
 \subsection{Data pipeline architecture}
 
-Data pipelines are orchestrated via \textbf{Talend} and \textbf{Python scripts}, producing aggregated metrics on a quarterly basis. The workflow includes:
+Data pipelines are orchestrated via \textbf{Talend} and \textbf{Python scripts}, producing aggregated 
+metrics on a quarterly basis. The workflow includes:
 
 \begin{enumerate}
-\item Extraction of relevant entities from the graph database (patients, transfusions, lab tests, surgical procedures)
-\item Linkage of entities through graph traversal queries
-\item Computation of compliance metrics for each PBM recommendation
-\item Generation of visual dashboards with temporal trends and department-level breakdowns
-\item Automated distribution to clinical stakeholders (web interface, PDF reports)
+\item Extraction of relevant entities from the graph database (patients, transfusions, lab tests, surgical procedures);
+\item Linkage of entities through graph traversal queries;
+\item Computation of compliance metrics for each PBM recommendation;
+\item Generation of temporal trends charts.
 \end{enumerate}
-
-Data security and patient privacy are ensured through anonymization and restricted access controls compliant with French regulations (RGPD).
 
 \section{Results}
 
-The PBM monitoring system has been operational since early 2024, with quarterly dashboard updates deployed across all surgical departments. Key deployment metrics include:
+The PBM monitoring system has been operational since early 2024, with quarterly reports updates sent 
+to anesthesiologist physicians in concerned surgical departments. 
+
+Key deployment metrics include:
 
 \begin{itemize}
 \item \textbf{Coverage:} All surgical units (general surgery, urology, orthopedics, cardiac surgery)
@@ -102,49 +132,16 @@ Example indicators tracked in the dashboards include:
 \item Compliance with intraoperative blood conservation strategies
 \end{itemize}
 
-Preliminary analyses reveal significant variations between departments and an overall improvement trend in PBM compliance over time. The visual dashboards provide actionable feedback, enabling clinical teams to identify specific areas requiring intervention.
+Preliminary analyses reveal significant variations between departments and an overall improvement 
+trend in PBM compliance over time. The visual dashboards provide actionable feedback, enabling clinical 
+teams to identify specific areas requiring intervention.
 
 \section{Discussion}
 
-Integrating PBM indicators into a graph-based clinical data warehouse enables \textbf{continuous quality monitoring} at hospital scale. Compared to prior PBM feedback systems \cite{Mehra2015}, our approach generalizes automation and data integration within a real hospital information system, moving beyond manual chart review or limited pilot studies.
-
-\subsection{Advantages of graph-based modeling}
-
-The graph structure offers several key advantages:
-
-\begin{itemize}
-\item \textbf{Flexibility:} Dynamic queries across heterogeneous medical entities without rigid schema alignment
-\item \textbf{Semantic richness:} Explicit representation of clinical relationships (e.g., transfusion $\rightarrow$ patient $\rightarrow$ surgery $\rightarrow$ lab test)
-\item \textbf{Scalability:} Efficient traversal of complex medical pathways for large patient cohorts
-\end{itemize}
-
-\subsection{Challenges and limitations}
-
-Despite these advantages, several challenges remain:
-
-\begin{itemize}
-\item \textbf{Data latency:} Current quarterly updates limit real-time feedback; moving toward monthly or weekly updates requires pipeline optimization
-\item \textbf{Data completeness:} Missing or incomplete records (e.g., unrecorded iron supplementation) affect indicator accuracy
-\item \textbf{User adoption:} Clinical engagement with dashboards requires ongoing communication and training
-\item \textbf{Governance:} Ensuring data quality and standardization across sources remains an ongoing effort
-\end{itemize}
-
-\subsection{Future developments}
-
-Future work involves refactoring the current data stack with modern tools as part of the \textbf{D2H} initiative (regional health data warehouse), including:
-
-\begin{itemize}
-\item \textbf{Dagster} for orchestration
-\item \textbf{dbt} for data transformation
-\item \textbf{OMOP Common Data Model} for standardization
-\item \textbf{Medallion architecture} (bronze-silver-gold layers)
-\end{itemize}
-
-The objective is to generalize real-time PBM monitoring across the region and support adaptive interventions, such as micro-learning modules triggered by dashboard alerts. This aligns with emerging frameworks for integrating quality improvement tools directly into clinical workflows.
-
-\section{Conclusion}
-
-This work demonstrates the feasibility of integrating automated PBM quality dashboards into a real-world hospital information system using a graph-based clinical data warehouse. Our approach provides continuous monitoring capabilities and actionable feedback to clinical teams, addressing a key requirement of the French If-PBM program. By leveraging graph database technology, we enable flexible and scalable analysis of complex clinical pathways. Future developments will focus on real-time monitoring, regional deployment, and enhanced clinical engagement through adaptive interventions. This case study offers valuable insights for the health informatics community on integrating information technology within real healthcare systems to support evidence-based practice and quality improvement.
+Integrating PBM indicators into a graph-based clinical data warehouse enables automated quality monitoring at 
+hospital scale. Future developments involves a refactoring of the current data stack with modern tools (Dagster, dbt, OMOP), 
+in a region-wide initiative called D2H. The objective is to generalize real-time PBM monitoring and 
+support adaptive interventions (such as micro-learning).
 
 \begin{thebibliography}{99}
 
