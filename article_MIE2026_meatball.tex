@@ -87,27 +87,23 @@ reaching 90\% by August 2023 from 30\% in May 2023, while gynecology remained un
 60\% throughout the period.
 
 \begin{figure}[h!]
+\vspace{-1em}
 \centering
 \includegraphics[width=0.85\textwidth]{figure.png}
 \caption{Temporal trends of standardized preoperative PBM assessment completion rates by surgical specialty (May 2023 -- February 2025). The graph shows quarterly measurements for orthopedics (blue), cardiology (orange), gynecology (green), and overall hospital performance (dark blue).}
 \label{fig:pbm_trends}
+\vspace{-1em}
 \end{figure}
 
 \section{Discussion}
 
-Integrating PBM indicators into a graph-based clinical data warehouse enables
- \textbf{automated quality monitoring} at hospital scale.
+Our automated reports identified departments requiring targeted PBM education 
+(e.g., gynecology for preoperative assessments). We plan to implement targeted micro-learning modules,
+using these automated reports as the primary, objective criterion to evaluate their effectiveness.
 
-Our automated reports identified departments with strong adherence to specific practices 
-(e.g., orthopedics for preoperative assessments) and those requiring improvement. 
-These reports will serve as the primary objective outcome measure to evaluate the 
-effectiveness of a micro-learning intervention targeting low-adherence specialties.
+Future developments involve refactoring the current stack with modern tools (Dagster, dbt, OMOP) as part of a regional 
+initiative to deploy fully automated, web-accessible dashboards.
 
-Future technical developments involve refactoring the current data stack with modern 
-tools (\textbf{Dagster}, \textbf{dbt}, \textbf{OMOP}) as part of a regional clinical 
-datawarehouse initiative. The objective is to replace semi-manual orchestration 
-(Talend, Python scripts) with fully automated, web-accessible dashboards enabling 
-real-time monitoring across the region.
 \begin{thebibliography}{99}
 
 \bibitem{godonReductionRedBlood2024}
