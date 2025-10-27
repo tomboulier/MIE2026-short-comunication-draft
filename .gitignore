@@ -1,2 +1,13 @@
-paper.docx
-paper.pdf
+# Ignore compiled files
+*.docx
+*.pdf
+*.aux
+*.log
+*.out
+*.toc
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore cls file (downloaded automatically)
+IOS-Book-Article.cls
