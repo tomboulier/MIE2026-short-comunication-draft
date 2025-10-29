@@ -4,7 +4,7 @@ This repository contains the Markdown source of the short communication submitte
 
 ## Build documents
 
-Generate paper .docx (MIE submission format) :
+Generate paper in PDF format :
 
 ```bash
 make
