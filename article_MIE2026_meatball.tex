@@ -59,7 +59,7 @@ technology within real healthcare systems to support continuous quality improvem
 
 Five PBM indicators were computed quarterly from May 2023 to June 2025: the proportion of standardized PBM preoperative check-ups, the proportion of corrective treatments for anemia or iron deficiency, the proportion of patients transfused per- or postoperatively, the proportion of single-unit transfusion episodes and the proportion of patients discharged with low hemoglobin levels. Each indicator was calculated for 3 specific surgical specialties: orthopedics, cardiology and gynecology. 
 
-These indicators were developed from our graph-based CDW \cite{Cance2022,Artemova2019}
+These indicators were developed from our graph-based CDW \cite{Cance2022}
 using Talend-orchestrated Python pipelines linking patients, transfusions, lab tests, and surgical procedures.
 
 \section{Results}
@@ -82,7 +82,7 @@ PBM assessment completion rates performed during the preoperative anesthesia con
 
 \section{Discussion and conclusion}
 
-The indicators show comparable dynamics across all surgical specialties, with an initial phase of growth followed by stagnation in recent periods. This could be explained by minimal clinical need—particularly for transfusion—or a lack of professional training, which will be addressed through microlearning modules in the coming months.
+The indicators show comparable dynamics across all surgical specialties, with an initial phase of growth followed by stagnation in recent periods. This could be explained by minimal clinical need—particularly for transfusion—or a lack of professional training. The latter will be addressed through microlearning modules in the coming months.
 
 On the technical level, the current data stack is being refactored with modern tools (Dagster, dbt, OMOP) as part of a regional data warehouse initiative, enabling fully automated, web-accessible dashboards in the future.
 
@@ -92,12 +92,7 @@ On the technical level, the current data stack is being refactored with modern t
 Godon A, et~al. Reduction of red blood cell transfusion with a patient blood management protocol in urological and visceral surgery: a before–after study. Anaesthesia Critical Care \& Pain Medicine. 2024 Aug;43(4):101395.
 
 \bibitem{Cance2022}
-Cance C, Lenne C, Artemova S, Mossuz P, Moreau-Gaudry A. Hypergraph based data model for complex health data exploration and its implementation in PREDIMED clinical data warehouse. Studies in Health Technology and Informatics. IOS Press; 2022.
-
-\bibitem{Artemova2019}
-Artemova S, et~al. PREDIMED: Clinical Data Warehouse of Grenoble Alpes University Hospital. In: Proceedings of MEDINFO 2019: Health and Wellbeing e-Networks for All; 2019. p. 1421--1425.
-
-
+Cance C, et~al. Hypergraph based data model for complex health data exploration and its implementation in PREDIMED clinical data warehouse. Studies in Health Technology and Informatics. IOS Press; 2022.
 
 \end{thebibliography}
 
