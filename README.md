@@ -1,6 +1,6 @@
 # MIE2026 Short Communication – If-PBM Reports
 
-This repository contains the Markdown source of the short communication submitted to MIE2026, describing the implementation of real-time reports for monitoring adherence to PBM recommendations using the PREDIMED data warehouse.
+This repository contains the Markdown source of the short communication submitted to MIE2026, describing the implementation of automated reports for monitoring adherence to PBM recommendations using the PREDIMED data warehouse.
 
 ## Build documents
 
